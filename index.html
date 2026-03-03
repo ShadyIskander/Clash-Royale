@@ -381,8 +381,6 @@ function card(team,idx,pm,sm){
     <div class="vtile ${vc.c} ${wiped?'wiped':''}">
       <div class="vemo">${vc.e}</div><div class="vtag">${vc.t}</div>
       <div class="valive">${alive}</div>
-      <div class="vpts">${sub} pts</div>
-      <div class="vsub">${owned?dead+' lost':'none'}</div>
     </div>`).join('');
 
   const sbRows=vb.map(({vc,alive,pts,sub})=>
@@ -416,19 +414,12 @@ function card(team,idx,pm,sm){
           <div class="wb-row"><span class="wb-lbl">💧 Liquid Capital</span><span class="wb-num">${team._liquid}</span></div>
           <div class="wb-divider"></div>
           ${stockPortfolio}
-          <div class="wb-divider"></div>
-          <div class="wb-row wb-total"><span style="color:rgba(255,255,255,.4)">📊 Stock Portfolio</span><span class="wb-num">${team._stockVal}</span></div>
-        </div>
+          </div>
       </div>
       ${bonus>0?`<div class="bonus-row"><div class="bonus-lbl">⚔ BATTLE BONUS</div><div class="bonus-val">+${bonus}</div></div>`:''}
       <div class="vlbl">◈ VEHICLES</div>
       <div class="vrow">${vhml}</div>
-      <div class="score-breakdown">
-        ${sbRows}
-        ${bonus>0?`<div class="sb-row"><span>⚔ BATTLE BONUS</span><span class="sb-val" style="color:var(--gold)">${bonus}</span></div>`:''}
-        <div class="sb-row total"><span>TOTAL SCORE</span><span class="sb-val">${team._score}</span></div>
       </div>
-    </div>
   </div>`;
 }
 
@@ -472,3 +463,4 @@ startCountdown();
 </script>
 </body>
 </html>
+
