@@ -6,7 +6,7 @@
 <title>HOSTILE TAKEOVER</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{boax-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#04060a;--bg2:#080c12;--bg3:#0d1520;
   --tank:#39ff6a;--navy:#00b4ff;--air:#c084fc;
@@ -15,8 +15,6 @@
   --text:#dde8f0;--muted:#3a5060;
 }
 html,body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden}
-
-/* ── BACKGROUND ── */
 .bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.14;animation:orbF linear infinite}
 .o1{width:700px;height:700px;background:#ff3c5a;top:-250px;left:-100px;animation-duration:28s}
@@ -29,11 +27,7 @@ html,body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-ser
 .scanlines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.1) 3px,rgba(0,0,0,.1) 4px)}
 .beam{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,229,255,.4),transparent);animation:beam 8s linear infinite}
 @keyframes beam{0%{top:-2px}100%{top:100vh}}
-
-/* ── APP ── */
 .app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
-
-/* ── HEADER ── */
 header{padding:0 16px;height:62px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(4,6,10,.8);backdrop-filter:blur(16px);position:sticky;top:0;z-index:50;gap:10px}
 .logo{font-family:'Bebas Neue',cursive;font-size:clamp(18px,4vw,30px);letter-spacing:.1em;background:linear-gradient(90deg,#ff3c5a,#ff6b00,#ffd700,#39ff6a,#00e5ff,#c084fc,#ff3c5a);background-size:400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:ls 5s linear infinite;white-space:nowrap}
 @keyframes ls{0%{background-position:0%}100%{background-position:400%}}
@@ -43,24 +37,18 @@ header{padding:0 16px;height:62px;display:flex;align-items:center;justify-conten
 @keyframes lp{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.8);opacity:.3}}
 .sync{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.06em;display:none}
 @media(min-width:500px){.sync{display:block}}
-
-/* ── TICKER ── */
+.cdown{position:relative;width:26px;height:26px;flex-shrink:0}
+.cdown-txt{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Share Tech Mono',monospace;font-size:7px;color:var(--capital)}
 .ticker{background:rgba(6,10,16,.9);border-bottom:1px solid var(--border);height:28px;display:flex;align-items:center;overflow:hidden;flex-shrink:0}
 .ttrack{display:flex;gap:50px;white-space:nowrap;animation:tick 30s linear infinite;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.1em}
 @keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .ti{color:var(--muted)}.ti .lb{margin-right:5px}.ti .vl{font-weight:700}
 .tup{color:var(--tank)}.tdn{color:var(--red)}.tfl{color:var(--muted)}
-
-/* ── MAIN ── */
 main{flex:1;padding:12px}
 @media(min-width:900px){main{padding:16px 24px;max-width:1600px;margin:0 auto}}
-
-/* ── SECTION LABEL ── */
 .slbl{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.25em;color:rgba(255,255,255,.2);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .slbl::before,.slbl::after{content:'';flex:1;height:1px;background:var(--border)}
 .slbl::before{flex:0 0 16px}
-
-/* ── STOCKS BAR ── */
 .stocks-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
 .scard{border-radius:10px;padding:12px 10px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.07);background:rgba(8,12,18,.75);backdrop-filter:blur(8px)}
 .scard::before{content:'';position:absolute;inset:0;opacity:.06;background:var(--sc)}
@@ -71,53 +59,35 @@ main{flex:1;padding:12px}
 .sdelta{font-family:'Share Tech Mono',monospace;font-size:10px;margin-top:3px}
 .spts{font-size:10px;color:rgba(255,255,255,.25);margin-top:2px}
 .spark{width:100%;height:26px;margin-top:6px}
-
-/* ── TEAMS GRID ── */
 .tgrid{display:grid;gap:10px;grid-template-columns:1fr}
 @media(min-width:460px){.tgrid{grid-template-columns:1fr 1fr}}
 @media(min-width:760px){.tgrid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:1060px){.tgrid{grid-template-columns:repeat(4,1fr)}}
 @media(min-width:1360px){.tgrid{grid-template-columns:repeat(5,1fr)}}
-
-/* ── TEAM CARD ── */
 .tcard{border-radius:12px;border:1px solid rgba(255,255,255,.07);background:rgba(8,12,18,.78);backdrop-filter:blur(10px);overflow:hidden;position:relative;animation:riseIn .45s cubic-bezier(.22,1,.36,1) both;transition:transform .2s}
 .tcard:hover{transform:translateY(-3px)}
 @keyframes riseIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .tcard.r1{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 0 40px rgba(255,215,0,.1)}
-.tcard.r2{border-color:rgba(192,192,192,.4)}
-.tcard.r3{border-color:rgba(205,127,50,.4)}
+.tcard.r2{border-color:rgba(192,192,192,.4)}.tcard.r3{border-color:rgba(205,127,50,.4)}
 .stripe{position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--tc);box-shadow:2px 0 16px var(--tc)}
-
-/* card head */
 .chead{padding:10px 12px 8px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(0,0,0,.2);gap:8px}
-.chead-left{}
 .crank{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.12em;line-height:1;margin-bottom:2px}
 .crank.gold{color:var(--gold);font-size:12px}
 .cname{font-family:'Bebas Neue',cursive;font-size:clamp(14px,2vw,18px);letter-spacing:.06em;color:var(--tc);text-shadow:0 0 16px rgba(var(--tcr),.45);line-height:1;word-break:break-word}
-
-/* SCORE — big prominent */
 .score-box{text-align:right;flex-shrink:0}
 .score-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--score);letter-spacing:.15em;opacity:.8;margin-bottom:1px}
 .score-val{font-family:'Bebas Neue',cursive;font-size:clamp(22px,3.5vw,30px);color:var(--score);text-shadow:0 0 20px rgba(255,107,0,.5);line-height:1}
 .score-unit{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,107,0,.5);margin-left:2px}
-
-/* card body */
 .cbody{padding:10px 12px 12px 16px}
-
-/* CAPITAL — clearly different from score */
 .cap-section{background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.12);border-radius:6px;padding:6px 10px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
 .cap-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--capital);letter-spacing:.15em;opacity:.7}
 .cap-val{font-family:'Bebas Neue',cursive;font-size:20px;color:var(--capital);text-shadow:0 0 12px rgba(0,229,255,.35);line-height:1}
 .cap-unit{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(0,229,255,.4);margin-left:2px}
-.cap-bar{height:2px;background:rgba(0,229,255,.1);border-radius:1px;overflow:hidden;margin-top:4px}
-.cap-fill{height:100%;background:linear-gradient(90deg,rgba(0,229,255,.4),rgba(0,229,255,.8));border-radius:1px;transition:width .8s ease}
-
-/* bonus pts */
+.cap-bar{height:2px;background:rgba(0,229,255,.1);border-radius:1px;overflow:hidden;margin-top:4px;width:80px}
+.cap-fill{height:100%;background:linear-gradient(90deg,rgba(0,229,255,.4),rgba(0,229,255,.8));border-radius:1px}
 .bonus-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding:4px 0}
 .bonus-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,215,0,.6);letter-spacing:.12em}
-.bonus-val{font-family:'Bebas Neue',cursive;font-size:16px;color:var(--gold);opacity:.85}
-
-/* vehicles */
+.bonus-val{font-family:'Bebas Neue',cursive;font-size:16px;color:var(--gold)}
 .vlbl{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,255,255,.18);letter-spacing:.15em;margin-bottom:6px}
 .vrow{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .vtile{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:6px 3px;text-align:center;position:relative;overflow:hidden}
@@ -129,15 +99,11 @@ main{flex:1;padding:12px}
 .valive{font-family:'Bebas Neue',cursive;font-size:16px;color:var(--vc);text-shadow:0 0 8px var(--vc);line-height:1}
 .vpts{font-family:'Share Tech Mono',monospace;font-size:7px;color:rgba(255,107,0,.7);margin-top:1px}
 .vsub{font-family:'Share Tech Mono',monospace;font-size:7px;color:rgba(255,255,255,.15);margin-top:1px}
-
-/* score breakdown */
 .score-breakdown{margin-top:8px;background:rgba(255,107,0,.05);border:1px solid rgba(255,107,0,.12);border-radius:6px;padding:6px 8px}
 .sb-row{display:flex;justify-content:space-between;align-items:center;font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,255,255,.3);padding:2px 0}
-.sb-row:last-child{border-top:1px solid rgba(255,107,0,.15);margin-top:3px;padding-top:5px;color:var(--score);font-size:9px}
+.sb-row.total{border-top:1px solid rgba(255,107,0,.15);margin-top:3px;padding-top:5px;color:var(--score);font-size:9px}
 .sb-val{color:var(--score);font-size:9px}
-.sb-row:last-child .sb-val{font-family:'Bebas Neue',cursive;font-size:16px}
-
-/* ── LOADER / ERROR ── */
+.sb-row.total .sb-val{font-family:'Bebas Neue',cursive;font-size:16px}
 .loader{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;gap:14px}
 .lring{width:44px;height:44px;border:2px solid rgba(255,255,255,.06);border-top-color:#00e5ff;border-right-color:#ff3c5a;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -145,17 +111,10 @@ main{flex:1;padding:12px}
 @keyframes blk{0%,100%{opacity:1}50%{opacity:.25}}
 .errbox{margin:24px auto;max-width:420px;text-align:center;background:rgba(255,60,90,.05);border:1px solid rgba(255,60,90,.18);border-radius:10px;padding:24px}
 .errm{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(255,110,130,.75);margin-top:8px;line-height:1.6}
-
-@keyframes flash{0%{filter:brightness(2.5)}100%{filter:brightness(1)}}
-.nflash{animation:flash .4s ease-out}
-
-/* ── FOOTER ── */
 footer{text-align:center;padding:12px;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.12em;border-top:1px solid var(--border);background:rgba(4,6,10,.8)}
-
-/* ── LEGEND ── */
-.legend{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:8px 12px;background:rgba(8,12,18,.6);border-bottom:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.1em}
+.legend{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:7px 12px;background:rgba(8,12,18,.6);border-bottom:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.1em}
 .leg-item{display:flex;align-items:center;gap:5px}
-.leg-dot{width:8px;height:8px;border-radius:2px}
+.leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -165,26 +124,31 @@ footer{text-align:center;padding:12px;font-family:'Share Tech Mono',monospace;fo
   <div class="orb o3"></div><div class="orb o4"></div><div class="orb o5"></div>
   <div class="scanlines"></div><div class="beam"></div>
 </div>
-
 <div class="app">
   <header>
     <div class="logo">⚔ HOSTILE TAKEOVER</div>
     <div class="hdr-r">
       <div class="live-badge"><div class="ldot"></div>LIVE</div>
       <div class="sync" id="syncTxt">—</div>
+      <div class="cdown" title="Refreshes every 10s">
+        <svg width="26" height="26" viewBox="0 0 26 26" style="transform:rotate(-90deg)">
+          <circle cx="13" cy="13" r="10" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="2"/>
+          <circle id="cring" cx="13" cy="13" r="10" fill="none" stroke="var(--capital)" stroke-width="2" stroke-dasharray="62.8" stroke-dashoffset="0"/>
+        </svg>
+        <span class="cdown-txt" id="ctxt">10</span>
+      </div>
     </div>
   </header>
 
-  <!-- LEGEND -->
   <div class="legend">
-    <div class="leg-item"><div class="leg-dot" style="background:var(--score)"></div><span style="color:var(--score)">SCORE PTS — determines ranking</span></div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--capital)"></div><span style="color:var(--capital)">CAPITAL — spending currency only</span></div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--gold)"></div><span style="color:var(--gold)">BONUS PTS — earned by destroying enemies</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--score)"></div><span style="color:var(--score)">SCORE — determines ranking</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--capital)"></div><span style="color:var(--capital)">CAPITAL — spending only</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--gold)"></div><span style="color:var(--gold)">BONUS — from destroying enemies</span></div>
   </div>
 
   <div class="ticker"><div class="ttrack" id="ttrack">
-    <span class="ti"><span class="lb" style="color:rgba(255,255,255,.12)">⬥ LOADING...</span></span>
-    <span class="ti"><span class="lb" style="color:rgba(255,255,255,.12)">⬥ LOADING...</span></span>
+    <span class="ti"><span class="lb" style="color:rgba(255,255,255,.12)">⬥ LOADING DATA...</span></span>
+    <span class="ti"><span class="lb" style="color:rgba(255,255,255,.12)">⬥ LOADING DATA...</span></span>
   </div></div>
 
   <main id="mainArea">
@@ -193,15 +157,13 @@ footer{text-align:center;padding:12px;font-family:'Share Tech Mono',monospace;fo
       <div class="ltxt">LOADING BATTLE DATA...</div>
     </div>
   </main>
-
   <footer id="ft">◈ AUTO-REFRESH EVERY 10s ◈ RANKED BY SCORE POINTS ◈</footer>
 </div>
 
 <script>
-// ─────────────────────────────────────────────
-// !! PASTE YOUR GOOGLE SHEET ID BELOW !!
+// ── YOUR SHEET ID ──
 const SHEET_ID = '1A23UY1LWW8KSCT0VVhZjj8QJXVjeR4h27LvdWkzYwVE';
-// ─────────────────────────────────────────────
+// ──────────────────
 
 const COLORS=[
   {h:'#ff3c5a',r:'255,60,90'},{h:'#00e5ff',r:'0,229,255'},{h:'#ffe600',r:'255,230,0'},
@@ -209,33 +171,41 @@ const COLORS=[
   {h:'#00ffcc',r:'0,255,204'},{h:'#ff60b0',r:'255,96,176'},{h:'#60b0ff',r:'96,176,255'},
   {h:'#ff9900',r:'255,153,0'},{h:'#ccff00',r:'204,255,0'},{h:'#ff4488',r:'255,68,136'},
 ];
-
 const VC={
-  Tanks:    {e:'🪖',t:'TANK',c:'vtank',sk:'Tanks'},
-  NavySeals:{e:'⚓',t:'NAVY',c:'vnavy',sk:'NavySeals'},
-  AirForce: {e:'✈',t:'AIR', c:'vair', sk:'AirForce'},
+  Tanks:    {e:'🪖',t:'TANK',c:'vtank'},
+  NavySeals:{e:'⚓',t:'NAVY',c:'vnavy'},
+  AirForce: {e:'✈', t:'AIR', c:'vair'},
 };
-
 let hist={TANK:[],NAVY:[],AIR:[]};
+let countdown=10;
 
-// ── FETCH ──
-async function go(){
-  try{
-    const[teams,stocks,prices]=await Promise.all([
-      fetchTab('Teams'),
-      fetchTab('Stocks'),
-      fetchTab('Prices')
-    ]);
-    render(teams,stocks,prices);
-    document.getElementById('syncTxt').textContent=
-      'SYNCED '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  }catch(e){showErr(e.message)}
+// ── COUNTDOWN ──
+function startCountdown(){
+  setInterval(()=>{
+    countdown--;
+    if(countdown<=0){ countdown=10; go(); }
+    tickCD();
+  },1000);
+  tickCD();
 }
 
+function tickCD(){
+  const ring=document.getElementById('cring');
+  const txt=document.getElementById('ctxt');
+  // fill drains as countdown decreases: full at 10, empty at 0
+  if(ring){
+    const offset=62.8*(countdown/10); // starts full (0 offset), drains to 62.8
+    ring.style.strokeDashoffset=62.8-offset;
+    ring.style.stroke=countdown>4?'var(--capital)':'var(--gold)';
+  }
+  if(txt) txt.textContent=countdown;
+}
+
+// ── FETCH with cache-bust ──
 async function fetchTab(tab){
-  const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(tab)}`;
-  const r=await fetch(url);
-  if(!r.ok)throw new Error(`HTTP ${r.status} fetching "${tab}" tab`);
+  const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(tab)}&_=${Date.now()}`;
+  const r=await fetch(url,{cache:'no-store'});
+  if(!r.ok) throw new Error(`HTTP ${r.status} on tab "${tab}"`);
   const txt=await r.text();
   const j=JSON.parse(txt.substring(txt.indexOf('{'),txt.lastIndexOf('}')+1));
   const cols=j.table.cols.map(c=>c.label||c.id);
@@ -246,239 +216,142 @@ async function fetchTab(tab){
   });
 }
 
-// ── RENDER ──
+// ── MAIN ──
+async function go(){
+  try{
+    const[tRows,sRows,pRows]=await Promise.all([
+      fetchTab('Teams'),
+      fetchTab('Stocks'),
+      fetchTab('Prices'),
+    ]);
+    render(tRows,sRows,pRows);
+    document.getElementById('syncTxt').textContent=
+      'SYNCED '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  }catch(e){ showErr(e.message); }
+}
+
 function render(tRows,sRows,pRows){
   document.getElementById('loader').style.display='none';
 
-  // Build stock map
   const sm={};
-  sRows.forEach(r=>{
-    const k=(r['Department']||'').toUpperCase().trim();
-    sm[k]={price:parseFloat(r['Price'])||0,change:parseFloat(r['Change'])||0};
-  });
+  sRows.forEach(r=>{ const k=(r['Department']||'').toUpperCase().trim(); sm[k]={price:parseFloat(r['Price'])||0,change:parseFloat(r['Change'])||0}; });
 
-  // Build prices map: { Tanks: {price, points}, NavySeals: {...}, AirForce: {...} }
   const pm={};
-  pRows.forEach(r=>{
-    const v=(r['Vehicle']||'').trim();
-    pm[v]={price:parseFloat(r['Price'])||0,points:parseFloat(r['Points'])||0};
-  });
+  pRows.forEach(r=>{ const v=(r['Vehicle']||'').trim(); pm[v]={price:parseFloat(r['Price'])||0,points:parseFloat(r['Points'])||0}; });
 
-  // Update sparkline history
-  ['TANK','NAVY','AIR'].forEach(k=>{
-    const p=sm[k]?.price||0;
-    if(p){hist[k].push(p);if(hist[k].length>24)hist[k].shift();}
-  });
+  ['TANK','NAVY','AIR'].forEach(k=>{ const p=sm[k]?.price||0; if(p){hist[k].push(p);if(hist[k].length>24)hist[k].shift();} });
 
-  // Filter + score each team
   const teams=tRows.filter(r=>r['TeamName']).map(team=>{
-    // Vehicle score = alive vehicles × points per vehicle
-    let vehicleScore=0;
-    Object.keys(VC).forEach(vk=>{
-      const owned=parseInt(team[vk])||0;
-      const dead=parseInt(team[vk+'Destroyed'])||0;
-      const alive=Math.max(0,owned-dead);
-      const pts=pm[vk]?.points||0;
-      vehicleScore+=alive*pts;
-    });
+    let vs=0;
+    Object.keys(VC).forEach(vk=>{ const alive=Math.max(0,(parseInt(team[vk])||0)-(parseInt(team[vk+'Destroyed'])||0)); vs+=alive*(pm[vk]?.points||0); });
     const bonus=parseFloat(team['BonusPoints'])||0;
-    const totalScore=vehicleScore+bonus;
-    return{...team,_vehicleScore:vehicleScore,_bonus:bonus,_totalScore:totalScore};
+    return{...team,_vs:vs,_bonus:bonus,_total:vs+bonus};
   });
+  teams.sort((a,b)=>b._total-a._total);
 
-  // Sort by total score descending
-  teams.sort((a,b)=>b._totalScore-a._totalScore);
-
-  // Rebuild entire UI every cycle — guarantees 100% fresh data
+  // full rebuild every cycle — no stale data ever
   document.getElementById('mainArea').innerHTML=buildAll(teams,sm,pm);
-  setTimeout(()=>drawSparks(sm),50);
+  setTimeout(()=>drawSparks(sm),60);
   updTicker(teams,sm);
-  document.getElementById('ft').textContent=
-    `◈ LAST SYNC: ${new Date().toLocaleTimeString()} ◈ ${teams.length} TEAMS ◈ RANKED BY SCORE POINTS ◈`;
+  document.getElementById('ft').textContent=`◈ LAST SYNC: ${new Date().toLocaleTimeString()} ◈ ${teams.length} TEAMS ◈ RANKED BY SCORE ◈`;
 }
 
-// ── BUILD HTML ──
 function buildAll(teams,sm,pm){
-  return`
-    <div>${buildStocks(sm,pm)}</div>
-    <div class="slbl">TEAM STANDINGS — RANKED BY SCORE</div>
-    <div class="tgrid">${teams.map((t,i)=>card(t,i,pm)).join('')}</div>
-  `;
+  return buildStocks(sm,pm)+`<div class="slbl">TEAM STANDINGS — RANKED BY SCORE</div><div class="tgrid">${teams.map((t,i)=>card(t,i,pm)).join('')}</div>`;
 }
 
 function buildStocks(sm,pm){
-  const cfg=[
-    {k:'TANK',c:'stank',n:'Tank Battalion',  e:'🪖',vk:'Tanks'},
-    {k:'NAVY',c:'snavy',n:'Navy SEALs',      e:'⚓',vk:'NavySeals'},
-    {k:'AIR', c:'sair', n:'Air Force',        e:'✈', vk:'AirForce'},
-  ];
-  return`
-    <div class="slbl">LIVE MARKET PRICES</div>
-    <div class="stocks-bar">
-      ${cfg.map(({k,c,n,e,vk})=>{
-        const d=sm[k]||{price:0,change:0};
-        const ch=d.change;
-        const pts=pm[vk]?.points||'?';
-        const price=pm[vk]?.price||'?';
-        return`
-          <div class="scard ${c}">
-            <div class="sdept">${e} ${k}</div>
-            <div class="snum" id="sp-${k}">${d.price}</div>
-            <div class="sdelta ${ch>0?'tup':ch<0?'tdn':'tfl'}" id="sc-${k}">${ch>0?'▲ +'+ch:ch<0?'▼ '+ch:'— 0'}</div>
-            <div class="spts">Cost: ${price} cap · ${pts} pts/unit</div>
-            <canvas class="spark" id="sk-${k}"></canvas>
-          </div>`;
-      }).join('')}
-    </div>`;
+  const cfg=[{k:'TANK',c:'stank',n:'Tank Battalion',e:'🪖',vk:'Tanks'},{k:'NAVY',c:'snavy',n:'Navy SEALs',e:'⚓',vk:'NavySeals'},{k:'AIR',c:'sair',n:'Air Force',e:'✈',vk:'AirForce'}];
+  return`<div class="slbl">LIVE MARKET PRICES</div><div class="stocks-bar">${cfg.map(({k,c,n,e,vk})=>{
+    const d=sm[k]||{price:0,change:0};const ch=d.change;
+    return`<div class="scard ${c}"><div class="sdept">${e} ${k}</div><div class="snum">${d.price}</div><div class="sdelta ${ch>0?'tup':ch<0?'tdn':'tfl'}">${ch>0?'▲ +'+ch:ch<0?'▼ '+ch:'— 0'}</div><div class="spts">Cost: ${pm[vk]?.price??'?'} cap · ${pm[vk]?.points??'?'} pts/unit</div><canvas class="spark" id="sk-${k}"></canvas></div>`;
+  }).join('')}</div>`;
 }
 
 function card(team,idx,pm){
   const c=COLORS[idx%COLORS.length];
   const capital=parseFloat(team['Capital'])||0;
-  const isFirst=idx===0,isSecond=idx===1,isThird=idx===2;
-  const rankClass=isFirst?'r1':isSecond?'r2':isThird?'r3':'';
-  const rankLabel=isFirst?'👑 #1':isSecond?'🥈 #2':isThird?'🥉 #3':'#'+(idx+1);
+  const rankLabel=idx===0?'👑 #1':idx===1?'🥈 #2':idx===2?'🥉 #3':'#'+(idx+1);
+  const rankClass=idx===0?'r1':idx===1?'r2':idx===2?'r3':'';
   const capPct=Math.min(100,(capital/200)*100);
+  const bonus=team._bonus||0;
 
-  // per-vehicle breakdown
-  const vBreakdown=Object.entries(VC).map(([vk,vc])=>{
-    const owned=parseInt(team[vk])||0;
-    const dead=parseInt(team[vk+'Destroyed'])||0;
-    const alive=Math.max(0,owned-dead);
+  const vb=Object.entries(VC).map(([vk,vc])=>{
+    const owned=parseInt(team[vk])||0;const dead=parseInt(team[vk+'Destroyed'])||0;const alive=Math.max(0,owned-dead);
     const pts=pm[vk]?.points||0;
-    const subtotal=alive*pts;
-    const wiped=owned>0&&alive===0;
-    return{vk,vc,owned,dead,alive,pts,subtotal,wiped};
+    return{vc,owned,dead,alive,pts,sub:alive*pts,wiped:owned>0&&alive===0};
   });
 
-  const vhml=vBreakdown.map(({vc,alive,pts,subtotal,wiped,owned,dead})=>`
+  const vhml=vb.map(({vc,alive,sub,wiped,owned,dead})=>`
     <div class="vtile ${vc.c} ${wiped?'wiped':''}">
-      <div class="vemo">${vc.e}</div>
-      <div class="vtag">${vc.t}</div>
-      <div class="valive">${alive}</div>
-      <div class="vpts">${subtotal} pts</div>
+      <div class="vemo">${vc.e}</div><div class="vtag">${vc.t}</div>
+      <div class="valive">${alive}</div><div class="vpts">${sub} pts</div>
       <div class="vsub">${owned?dead+' lost':'none'}</div>
     </div>`).join('');
 
-  // score breakdown rows
-  const sbRows=vBreakdown.map(({vc,alive,pts,subtotal})=>`
-    <div class="sb-row">
-      <span>${vc.e} ${vc.t} (${alive}×${pts})</span>
-      <span class="sb-val">${subtotal}</span>
-    </div>`).join('');
+  const sbRows=vb.map(({vc,alive,pts,sub})=>`<div class="sb-row"><span>${vc.e} ${vc.t} (${alive}×${pts})</span><span class="sb-val">${sub}</span></div>`).join('');
 
-  const bonus=team._bonus||0;
-  const bonusRow=bonus>0?`
-    <div class="sb-row">
-      <span>⚔ BATTLE BONUS</span>
-      <span class="sb-val" style="color:var(--gold)">${bonus}</span>
-    </div>`:'';
-
-  return`
-    <div class="tcard ${rankClass}" style="--tc:${c.h};--tcr:${c.r};" >
-      <div class="stripe"></div>
-      <div class="chead">
-        <div class="chead-left">
-          <div class="crank ${isFirst?'gold':''}">${rankLabel}</div>
-          <div class="cname">${team['TeamName']||'?'}</div>
-        </div>
-        <div class="score-box">
-          <div class="score-lbl">SCORE</div>
-          <div class="score-val">${team._totalScore}<span class="score-unit">PTS</span></div>
-        </div>
+  return`<div class="tcard ${rankClass}" style="--tc:${c.h};--tcr:${c.r};">
+    <div class="stripe"></div>
+    <div class="chead">
+      <div><div class="crank ${idx===0?'gold':''}">${rankLabel}</div><div class="cname">${team['TeamName']||'?'}</div></div>
+      <div class="score-box"><div class="score-lbl">SCORE</div><div class="score-val">${team._total}<span class="score-unit">PTS</span></div></div>
+    </div>
+    <div class="cbody">
+      <div class="cap-section">
+        <div><div class="cap-lbl">◈ CAPITAL (spending only)</div><div class="cap-bar"><div class="cap-fill" style="width:${capPct}%"></div></div></div>
+        <div><span class="cap-val">${capital}</span><span class="cap-unit">CAP</span></div>
       </div>
-      <div class="cbody">
-
-        <!-- CAPITAL — spending currency -->
-        <div class="cap-section">
-          <div>
-            <div class="cap-lbl">◈ CAPITAL (spending only)</div>
-            <div class="cap-bar" style="width:80px"><div class="cap-fill" style="width:${capPct}%"></div></div>
-          </div>
-          <div>
-            <span class="cap-val">${capital}</span><span class="cap-unit">CAP</span>
-          </div>
-        </div>
-
-        ${bonus>0?`
-        <!-- BONUS PTS -->
-        <div class="bonus-row">
-          <div class="bonus-lbl">⚔ BATTLE BONUS PTS</div>
-          <div class="bonus-val">+${bonus}</div>
-        </div>`:''}
-
-        <!-- VEHICLES -->
-        <div class="vlbl">◈ VEHICLES · ALIVE / SCORE</div>
-        <div class="vrow">${vhml}</div>
-
-        <!-- SCORE BREAKDOWN -->
-        <div class="score-breakdown">
-          ${sbRows}
-          ${bonusRow}
-          <div class="sb-row">
-            <span>TOTAL SCORE</span>
-            <span class="sb-val">${team._totalScore}</span>
-          </div>
-        </div>
-
+      ${bonus>0?`<div class="bonus-row"><div class="bonus-lbl">⚔ BATTLE BONUS</div><div class="bonus-val">+${bonus}</div></div>`:''}
+      <div class="vlbl">◈ VEHICLES · ALIVE / SCORE</div>
+      <div class="vrow">${vhml}</div>
+      <div class="score-breakdown">
+        ${sbRows}
+        ${bonus>0?`<div class="sb-row"><span>⚔ BATTLE BONUS</span><span class="sb-val" style="color:var(--gold)">${bonus}</span></div>`:''}
+        <div class="sb-row total"><span>TOTAL SCORE</span><span class="sb-val">${team._total}</span></div>
       </div>
-    </div>`;
+    </div>
+  </div>`;
 }
 
-// ── SPARKLINES ──
 function drawSparks(sm){
   const col={TANK:'#39ff6a',NAVY:'#00b4ff',AIR:'#c084fc'};
   ['TANK','NAVY','AIR'].forEach(k=>{
     const cv=document.getElementById('sk-'+k);if(!cv)return;
     const ctx=cv.getContext('2d');const h=hist[k];
-    cv.width=cv.offsetWidth||160;cv.height=26;
-    if(h.length<2)return;
+    cv.width=cv.offsetWidth||160;cv.height=26;if(h.length<2)return;
     const W=cv.width,H=cv.height,mn=Math.min(...h),mx=Math.max(...h),rng=mx-mn||1;
     const pts=h.map((v,i)=>[(i/(h.length-1))*W,H-((v-mn)/rng)*(H-4)-2]);
     ctx.clearRect(0,0,W,H);
-    const g=ctx.createLinearGradient(0,0,0,H);
-    g.addColorStop(0,col[k]+'44');g.addColorStop(1,'transparent');
-    ctx.beginPath();ctx.moveTo(pts[0][0],H);
-    pts.forEach(p=>ctx.lineTo(p[0],p[1]));
-    ctx.lineTo(pts[pts.length-1][0],H);ctx.closePath();
-    ctx.fillStyle=g;ctx.fill();
-    ctx.beginPath();pts.forEach((p,i)=>i===0?ctx.moveTo(p[0],p[1]):ctx.lineTo(p[0],p[1]));
-    ctx.strokeStyle=col[k];ctx.lineWidth=1.5;ctx.stroke();
+    const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,col[k]+'44');g.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.moveTo(pts[0][0],H);pts.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.lineTo(pts[pts.length-1][0],H);ctx.closePath();ctx.fillStyle=g;ctx.fill();
+    ctx.beginPath();pts.forEach((p,i)=>i===0?ctx.moveTo(p[0],p[1]):ctx.lineTo(p[0],p[1]));ctx.strokeStyle=col[k];ctx.lineWidth=1.5;ctx.stroke();
   });
 }
 
-// ── TICKER ──
 function updTicker(teams,sm){
   const parts=[];
   ['TANK','NAVY','AIR'].forEach(k=>{
     const d=sm[k]||{price:0,change:0};const ch=d.change;
     parts.push(`<span class="ti"><span class="lb">${k}</span><span class="vl ${ch>0?'tup':ch<0?'tdn':'tfl'}">${d.price} ${ch>0?'▲+'+ch:ch<0?'▼'+ch:'—'}</span></span>`);
   });
-  parts.push('<span class="ti" style="color:rgba(255,255,255,.1);margin:0 14px">◈</span>');
-  teams.forEach((t,i)=>{
-    parts.push(`<span class="ti"><span class="lb">#${i+1} ${t['TeamName']}:</span><span class="vl" style="color:var(--score)">${t._totalScore} PTS</span></span>`);
-  });
+  parts.push('<span class="ti" style="opacity:.2;margin:0 12px">◈</span>');
+  teams.forEach((t,i)=>{ parts.push(`<span class="ti"><span class="lb">#${i+1} ${t['TeamName']}:</span><span class="vl" style="color:var(--score)">${t._total} PTS</span></span>`); });
   const tr=document.getElementById('ttrack');
-  if(tr)tr.innerHTML=[...parts,...parts].join('');
+  if(tr) tr.innerHTML=[...parts,...parts].join('');
 }
 
-// ── ERROR ──
 function showErr(msg){
   document.getElementById('loader').style.display='none';
   const m=document.getElementById('mainArea');
   if(!document.getElementById('eb'))
-    m.insertAdjacentHTML('afterbegin',`
-      <div class="errbox" id="eb">
-        <div style="font-size:32px;margin-bottom:8px">⚠</div>
-        <strong style="color:#ff6070;font-family:'Bebas Neue',cursive;font-size:18px">DATA FEED ERROR</strong>
-        <div class="errm" id="em">${msg}</div>
-        <div class="errm" style="margin-top:6px;opacity:.5">Check sheet is public · All 3 tabs exist: Teams, Stocks, Prices</div>
-      </div>`);
+    m.insertAdjacentHTML('afterbegin',`<div class="errbox" id="eb"><div style="font-size:30px;margin-bottom:8px">⚠</div><strong style="color:#ff6070;font-family:'Bebas Neue',cursive;font-size:18px">DATA FEED ERROR</strong><div class="errm" id="em">${msg}</div><div class="errm" style="margin-top:6px;opacity:.5">Check: sheet is public · tabs named exactly: Teams, Stocks, Prices</div></div>`);
   else document.getElementById('em').textContent=msg;
 }
 
+// ── BOOT ──
 go();
-setInterval(go,10000);
+startCountdown();
 </script>
 </body>
 </html>
