@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOSTILE TAKEOVER</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060a;--bg2:#080c12;--bg3:#0c1018;
+  --tank:#39ff6a;--navy:#00b4ff;--air:#b060ff;
+  --border:rgba(255,255,255,0.07);--text:#dde8f0;--muted:#3a4f62;
+}
+html,body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* BG */
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:.16;animation:orbF linear infinite}
+.o1{width:650px;height:650px;background:#ff3c5a;top:-200px;left:-80px;animation-duration:26s}
+.o2{width:550px;height:550px;background:#00e5ff;top:25%;right:-130px;animation-duration:33s;animation-direction:reverse}
+.o3{width:480px;height:480px;background:#ffe600;bottom:-80px;left:28%;animation-duration:21s}
+.o4{width:380px;height:380px;background:#b060ff;top:55%;left:15%;animation-duration:29s}
+@keyframes orbF{0%{transform:translate(0,0) scale(1)}33%{transform:translate(44px,-28px) scale(1.07)}66%{transform:translate(-18px,42px) scale(.94)}100%{transform:translate(0,0) scale(1)}}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:50px 50px}
+.scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.11) 3px,rgba(0,0,0,.11) 4px)}
+.beam{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,229,255,.55),transparent);animation:beam 7s linear infinite}
+@keyframes beam{0%{top:-2px}100%{top:100vh}}
+
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
+
+/* HEADER */
+header{padding:0 20px;height:68px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(4,6,10,.72);backdrop-filter:blur(14px);position:sticky;top:0;z-index:50;gap:12px}
+.logo{font-family:'Bebas Neue',cursive;font-size:clamp(20px,4.5vw,34px);letter-spacing:.1em;background:linear-gradient(90deg,#ff3c5a,#ff6b00,#ffe600,#39ff6a,#00e5ff,#b060ff,#ff3c5a);background-size:400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:ls 5s linear infinite;white-space:nowrap}
+@keyframes ls{0%{background-position:0%}100%{background-position:400%}}
+.hdr-r{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.live-badge{display:flex;align-items:center;gap:6px;background:rgba(57,255,106,.09);border:1px solid rgba(57,255,106,.28);border-radius:20px;padding:5px 12px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--tank);letter-spacing:.1em}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--tank);animation:lp 1.3s ease-in-out infinite}
+@keyframes lp{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.7);opacity:.4}}
+.sync{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.08em}
+
+/* TICKER */
+.ticker{background:rgba(8,12,18,.88);border-bottom:1px solid var(--border);height:30px;display:flex;align-items:center;overflow:hidden;flex-shrink:0}
+.ttrack{display:flex;gap:56px;white-space:nowrap;animation:tick 28s linear infinite;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.1em}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ti{color:var(--muted)}.ti .lbl{margin-right:6px}.ti .val{font-weight:700}
+.tup{color:var(--tank)}.tdn{color:#ff3c5a}.tfl{color:var(--muted)}.tsep{color:rgba(255,255,255,.1);margin:0 18px}
+
+/* MAIN */
+main{flex:1;padding:14px}
+@media(min-width:900px){main{padding:18px 26px;max-width:1600px;margin:0 auto}}
+
+/* SECTION LABEL */
+.slbl{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.25em;color:rgba(255,255,255,.22);text-transform:uppercase;margin-bottom:11px;display:flex;align-items:center;gap:10px}
+.slbl::before,.slbl::after{content:'';flex:1;height:1px;background:var(--border)}
+.slbl::before{flex:0 0 18px}
+
+/* STOCKS */
+.stocks-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.scard{border-radius:10px;padding:13px 12px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:rgba(8,12,18,.72);backdrop-filter:blur(8px)}
+.scard::before{content:'';position:absolute;inset:0;opacity:.07;background:var(--sc)}
+.scard::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--sc);box-shadow:0 0 14px var(--sc)}
+.scard.stank{--sc:var(--tank)}.scard.snavy{--sc:var(--navy)}.scard.sair{--sc:var(--air)}
+.sdept{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--sc);margin-bottom:5px}
+.snum{font-family:'Bebas Neue',cursive;font-size:clamp(26px,4.5vw,42px);color:var(--sc);line-height:1;text-shadow:0 0 28px var(--sc)}
+.sdelta{font-family:'Share Tech Mono',monospace;font-size:11px;margin-top:4px}
+.sfull{font-size:11px;color:rgba(255,255,255,.28);margin-top:4px}
+.spark{width:100%;height:30px;margin-top:8px}
+
+/* TEAMS */
+.tgrid{display:grid;gap:11px;grid-template-columns:1fr}
+@media(min-width:480px){.tgrid{grid-template-columns:1fr 1fr}}
+@media(min-width:780px){.tgrid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1080px){.tgrid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1380px){.tgrid{grid-template-columns:repeat(5,1fr)}}
+
+/* TEAM CARD */
+.tcard{border-radius:12px;border:1px solid rgba(255,255,255,.07);background:rgba(8,12,18,.76);backdrop-filter:blur(10px);overflow:hidden;position:relative;animation:riseIn .5s cubic-bezier(.22,1,.36,1) both;transition:transform .2s}
+.tcard:hover{transform:translateY(-4px)}
+@keyframes riseIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tcard.r1{border-color:var(--tc);box-shadow:0 0 0 1px var(--tc),0 0 44px rgba(var(--tcr),.13)}
+.stripe{position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--tc);box-shadow:2px 0 18px var(--tc)}
+.chead{padding:11px 13px 9px 17px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(0,0,0,.18)}
+.crank{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(255,255,255,.22);letter-spacing:.12em;line-height:1}
+.crank.top{color:var(--tc);font-size:15px}
+.cname{font-family:'Bebas Neue',cursive;font-size:clamp(15px,2.2vw,19px);letter-spacing:.06em;color:var(--tc);text-shadow:0 0 18px rgba(var(--tcr),.5);line-height:1.1;word-break:break-word}
+.cbody{padding:11px 13px 13px 17px}
+.crow{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:5px}
+.clbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.28);letter-spacing:.15em}
+.cval{font-family:'Bebas Neue',cursive;font-size:28px;color:var(--tc);text-shadow:0 0 14px rgba(var(--tcr),.38);line-height:1}
+.cunit{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(255,255,255,.2);margin-left:4px}
+.cbarw{margin-bottom:13px}
+.cbar{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.cfill{height:100%;background:var(--tc);box-shadow:0 0 8px var(--tc);border-radius:2px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.vlbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.15em;margin-bottom:7px}
+.vrow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.vtile{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:7px;padding:7px 4px;text-align:center;transition:all .3s;position:relative;overflow:hidden}
+.vtile::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--vc);opacity:.55}
+.vtile.vtank{--vc:var(--tank)}.vtile.vnavy{--vc:var(--navy)}.vtile.vair{--vc:var(--air)}
+.vtile.wiped{opacity:.22;filter:grayscale(1)}
+.vemo{font-size:16px;line-height:1;margin-bottom:3px}
+.vtag{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--vc);letter-spacing:.1em;margin-bottom:3px}
+.valive{font-family:'Bebas Neue',cursive;font-size:18px;color:var(--vc);text-shadow:0 0 10px var(--vc);line-height:1}
+.vsub{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,255,255,.18);margin-top:1px}
+.pills{display:flex;gap:5px;margin-top:9px}
+.pill{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:5px;padding:5px 4px;text-align:center}
+.pval{font-family:'Bebas Neue',cursive;font-size:16px;color:var(--tc);line-height:1}
+.plbl{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,255,255,.2);letter-spacing:.06em;margin-top:1px}
+
+/* LOADER / ERROR */
+.loader{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;gap:16px}
+.lring{width:46px;height:46px;border:2px solid rgba(255,255,255,.07);border-top-color:#00e5ff;border-right-color:#ff3c5a;border-radius:50%;animation:spin .75s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltxt{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--muted);animation:blk 1.5s ease-in-out infinite}
+@keyframes blk{0%,100%{opacity:1}50%{opacity:.28}}
+.errbox{margin:28px auto;max-width:420px;text-align:center;background:rgba(255,60,90,.06);border:1px solid rgba(255,60,90,.2);border-radius:12px;padding:28px}
+.errm{font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(255,110,130,.8);margin-top:8px;line-height:1.6}
+
+@keyframes flash{0%{filter:brightness(3)}100%{filter:brightness(1)}}
+.nflash{animation:flash .5s ease-out}
+
+footer{text-align:center;padding:14px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.13em;border-top:1px solid var(--border);background:rgba(4,6,10,.8)}
+</style>
+</head>
+<body>
+<div class="bg">
+  <div class="grid"></div>
+  <div class="orb o1"></div><div class="orb o2"></div>
+  <div class="orb o3"></div><div class="orb o4"></div>
+  <div class="scan"></div><div class="beam"></div>
+</div>
+<div class="app">
+  <header>
+    <div class="logo">⚔ HOSTILE TAKEOVER</div>
+    <div class="hdr-r">
+      <div class="live-badge"><div class="ldot"></div>LIVE</div>
+      <div class="sync" id="syncTxt">—</div>
+    </div>
+  </header>
+  <div class="ticker"><div class="ttrack" id="ttrack">
+    <span class="ti"><span class="lbl" style="color:rgba(255,255,255,.15)">⬥ LOADING...</span></span>
+    <span class="ti"><span class="lbl" style="color:rgba(255,255,255,.15)">⬥ LOADING...</span></span>
+  </div></div>
+  <main id="mainArea">
+    <div class="loader" id="loader">
+      <div class="lring"></div><div class="ltxt">LOADING BATTLE DATA...</div>
+    </div>
+  </main>
+  <footer id="ft">◈ AUTO-REFRESH EVERY 10s ◈ GOOGLE SHEETS POWERED ◈</footer>
+</div>
+<script>
+// ── SET YOUR SHEET ID HERE ──────────────────────────────
+const SHEET_ID = '1A23UY1LWW8KSCT0VVhZjj8QJXVjeR4h27LvdWkzYwVE';
+// ───────────────────────────────────────────────────────
+
+const COLORS=[
+  {h:'#ff3c5a',r:'255,60,90'},{h:'#00e5ff',r:'0,229,255'},{h:'#ffe600',r:'255,230,0'},
+  {h:'#39ff6a',r:'57,255,106'},{h:'#ff6b00',r:'255,107,0'},{h:'#b060ff',r:'176,96,255'},
+  {h:'#00ffcc',r:'0,255,204'},{h:'#ff60b0',r:'255,96,176'},{h:'#60b0ff',r:'96,176,255'},
+  {h:'#ff9900',r:'255,153,0'},{h:'#ccff00',r:'204,255,0'},{h:'#ff4488',r:'255,68,136'},
+];
+const VC={Tanks:{e:'🪖',t:'TANK',c:'vtank'},NavySeals:{e:'⚓',t:'NAVY',c:'vnavy'},AirForce:{e:'✈',t:'AIR',c:'vair'}};
+let hist={TANK:[],NAVY:[],AIR:[]};let built=false;
+
+async function go(){
+  try{
+    const[teams,stocks]=await Promise.all([ft2('Teams'),ft2('Stocks')]);
+    render(teams,stocks);
+    document.getElementById('syncTxt').textContent='SYNCED '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  }catch(e){showErr(e.message)}
+}
+
+async function ft2(tab){
+  const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(tab)}`;
+  const r=await fetch(url);if(!r.ok)throw new Error(`HTTP ${r.status} — is the sheet public?`);
+  const txt=await r.text();
+  const j=JSON.parse(txt.substring(txt.indexOf('{'),txt.lastIndexOf('}')+1));
+  const cols=j.table.cols.map(c=>c.label||c.id);
+  return(j.table.rows||[]).map(row=>{const o={};row.c.forEach((cell,i)=>{o[cols[i]]=cell?(cell.v??''):'';});return o;});
+}
+
+function render(tRows,sRows){
+  document.getElementById('loader').style.display='none';
+  const sm={};sRows.forEach(r=>{const k=(r['Department']||'').toUpperCase().trim();sm[k]={price:parseFloat(r['Price'])||0,change:parseFloat(r['Change'])||0};});
+  ['TANK','NAVY','AIR'].forEach(k=>{const p=sm[k]?.price||0;if(p){hist[k].push(p);if(hist[k].length>24)hist[k].shift();}});
+  const teams=tRows.filter(r=>r['TeamName']).sort((a,b)=>(parseFloat(b['Capital'])||0)-(parseFloat(a['Capital'])||0));
+  if(!built){document.getElementById('mainArea').innerHTML=buildAll(teams,sm);built=true;}
+  else{updStocks(sm);updTeams(teams);}
+  drawSparks();updTicker(teams,sm);
+  document.getElementById('ft').textContent=`◈ LAST SYNC: ${new Date().toLocaleTimeString()} ◈ ${teams.length} TEAMS ◈ AUTO-REFRESH 10s ◈`;
+}
+
+function buildAll(teams,sm){
+  const sc=[{k:'TANK',c:'stank',n:'Tank Battalion',e:'🪖'},{k:'NAVY',c:'snavy',n:'Navy SEALs',e:'⚓'},{k:'AIR',c:'sair',n:'Air Force',e:'✈'}];
+  const stocksHtml=`<div class="slbl">LIVE MARKET PRICES</div><div class="stocks-bar">${sc.map(({k,c,n,e})=>{
+    const d=sm[k]||{price:0,change:0};const ch=d.change;
+    return`<div class="scard ${c}"><div class="sdept">${e} ${k}</div><div class="snum" id="sp-${k}">${d.price}</div><div class="sdelta ${ch>0?'tup':ch<0?'tdn':'tfl'}" id="sc-${k}">${ch>0?'▲ +'+ch:ch<0?'▼ '+ch:'— 0'}</div><div class="sfull">${n}</div><canvas class="spark" id="sk-${k}"></canvas></div>`;
+  }).join('')}</div>`;
+  return`<div id="ss">${stocksHtml}</div><div class="slbl">TEAM STANDINGS</div><div class="tgrid" id="tg">${teams.map((t,i)=>card(t,i)).join('')}</div>`;
+}
+
+function updStocks(sm){
+  ['TANK','NAVY','AIR'].forEach(k=>{
+    const d=sm[k]||{price:0,change:0};
+    const pe=document.getElementById('sp-'+k),ce=document.getElementById('sc-'+k);if(!pe)return;
+    const prev=parseFloat(pe.textContent)||0;pe.textContent=d.price;
+    if(prev!==d.price){pe.classList.remove('nflash');void pe.offsetWidth;pe.classList.add('nflash');}
+    if(ce){const ch=d.change;ce.textContent=ch>0?'▲ +'+ch:ch<0?'▼ '+ch:'— 0';ce.className='sdelta '+(ch>0?'tup':ch<0?'tdn':'tfl');}
+  });
+}
+
+function drawSparks(){
+  const col={TANK:'#39ff6a',NAVY:'#00b4ff',AIR:'#b060ff'};
+  ['TANK','NAVY','AIR'].forEach(k=>{
+    const cv=document.getElementById('sk-'+k);if(!cv)return;
+    const ctx=cv.getContext('2d');const h=hist[k];
+    cv.width=cv.offsetWidth||180;cv.height=30;if(h.length<2)return;
+    const W=cv.width,H=cv.height,mn=Math.min(...h),mx=Math.max(...h),rng=mx-mn||1;
+    const pts=h.map((v,i)=>[(i/(h.length-1))*W,H-((v-mn)/rng)*(H-4)-2]);
+    ctx.clearRect(0,0,W,H);
+    const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,col[k]+'44');g.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.moveTo(pts[0][0],H);pts.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.lineTo(pts[pts.length-1][0],H);ctx.closePath();ctx.fillStyle=g;ctx.fill();
+    ctx.beginPath();pts.forEach((p,i)=>i===0?ctx.moveTo(p[0],p[1]):ctx.lineTo(p[0],p[1]));ctx.strokeStyle=col[k];ctx.lineWidth=1.5;ctx.stroke();
+  });
+}
+
+function card(team,idx){
+  const c=COLORS[idx%COLORS.length];
+  const capital=parseFloat(team['Capital'])||0;
+  const isFirst=idx===0;
+  const capPct=Math.min(100,(capital/200)*100);
+  const totalOwned=['Tanks','NavySeals','AirForce'].reduce((s,k)=>s+(parseInt(team[k])||0),0);
+  const totalDead=['TanksDestroyed','NavyDestroyed','AirDestroyed'].reduce((s,k)=>s+(parseInt(team[k])||0),0);
+  const totalAlive=totalOwned-totalDead;
+  const vhml=Object.entries(VC).map(([vk,vc])=>{
+    const owned=parseInt(team[vk])||0;const dead=parseInt(team[vk+'Destroyed'])||0;const alive=Math.max(0,owned-dead);
+    return`<div class="vtile ${vc.c} ${owned>0&&alive===0?'wiped':''}"><div class="vemo">${vc.e}</div><div class="vtag">${vc.t}</div><div class="valive">${alive}</div><div class="vsub">${owned?dead+' lost':'none'}</div></div>`;
+  }).join('');
+  return`<div class="tcard ${isFirst?'r1':''}" style="--tc:${c.h};--tcr:${c.r};" id="tc-${idx}">
+    <div class="stripe"></div>
+    <div class="chead"><div><div class="crank ${isFirst?'top':''}">${isFirst?'👑 #1':'#'+(idx+1)}</div><div class="cname">${team['TeamName']||'?'}</div></div></div>
+    <div class="cbody">
+      <div class="crow"><div class="clbl">◈ CAPITAL</div><div><span class="cval" id="cv-${idx}">${capital}</span><span class="cunit">PTS</span></div></div>
+      <div class="cbarw"><div class="cbar"><div class="cfill" id="cb-${idx}" style="width:${capPct}%"></div></div></div>
+      <div class="vlbl">◈ VEHICLES · ALIVE / OWNED</div>
+      <div class="vrow">${vhml}</div>
+      <div class="pills">
+        <div class="pill"><div class="pval">${totalOwned}</div><div class="plbl">BOUGHT</div></div>
+        <div class="pill"><div class="pval" style="color:#ff3c5a">${totalDead}</div><div class="plbl">LOST</div></div>
+        <div class="pill"><div class="pval">${totalAlive}</div><div class="plbl">ACTIVE</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function updTeams(teams){
+  const tg=document.getElementById('tg');if(!tg)return;
+  if(tg.querySelectorAll('.tcard').length!==teams.length){tg.innerHTML=teams.map((t,i)=>card(t,i)).join('');return;}
+  teams.forEach((team,idx)=>{
+    const capital=parseFloat(team['Capital'])||0;
+    const cve=document.getElementById('cv-'+idx),cbe=document.getElementById('cb-'+idx);
+    if(cve){const p=parseFloat(cve.textContent)||0;cve.textContent=capital;if(p!==capital){cve.classList.remove('nflash');void cve.offsetWidth;cve.classList.add('nflash');}}
+    if(cbe)cbe.style.width=Math.min(100,(capital/200)*100)+'%';
+  });
+}
+
+function updTicker(teams,sm){
+  const parts=[];
+  ['TANK','NAVY','AIR'].forEach(k=>{
+    const d=sm[k]||{price:0,change:0};const ch=d.change;const cls=ch>0?'tup':ch<0?'tdn':'tfl';
+    parts.push(`<span class="ti"><span class="lbl">${k}</span><span class="val ${cls}">${d.price} ${ch>0?'▲+'+ch:ch<0?'▼'+ch:'—'}</span></span>`);
+  });
+  parts.push('<span class="tsep">◈</span>');
+  teams.forEach((t,i)=>{parts.push(`<span class="ti"><span class="lbl">#${i+1} ${t['TeamName']}:</span><span class="val">${t['Capital']||0} PTS</span></span>`);});
+  const tr=document.getElementById('ttrack');if(tr)tr.innerHTML=[...parts,...parts].join('');
+}
+
+function showErr(msg){
+  document.getElementById('loader').style.display='none';
+  const m=document.getElementById('mainArea');
+  if(!document.getElementById('eb'))
+    m.insertAdjacentHTML('afterbegin',`<div class="errbox" id="eb"><div style="font-size:34px;margin-bottom:10px">⚠</div><strong style="color:#ff6070;font-family:'Bebas Neue',cursive;font-size:20px">DATA FEED INTERRUPTED</strong><div class="errm" id="em">${msg}</div><div class="errm" style="margin-top:8px;opacity:.55">Ensure the Google Sheet is public and SHEET_ID is set correctly.</div></div>`);
+  else document.getElementById('em').textContent=msg;
+}
+
+go();setInterval(go,10000);
+</script>
+</body>
+</html>
