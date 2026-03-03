@@ -262,7 +262,7 @@ function buildStocks(sm,pm){
   const cfg=[{k:'TANK',c:'stank',n:'Tank Battalion',e:'🪖',vk:'Tanks',label:'Tank Stock'},{k:'NAVY',c:'snavy',n:'Navy SEALs',e:'⚓',vk:'NavySeals',label:'Navy Stock'},{k:'AIR',c:'sair',n:'Air Force',e:'✈',vk:'AirForce',label:'Air Stock'}];
   return`<div class="slbl">LIVE MARKET PRICES</div><div class="stocks-bar">${cfg.map(({k,c,n,e,vk,label})=>{
     const d=sm[k]||{price:0,change:0};const ch=d.change;
-    return`<div class="scard ${c}"><div class="sdept">${e} ${label}</div><div class="snum">${d.price}</div><div class="sdelta ${ch>0?'tup':ch<0?'tdn':'tfl'}">${ch>0?'▲ +'+ch:ch<0?'▼ '+ch:'— 0'}</div><div class="spts">Cost: ${pm[vk]?.price??'?'} cap · ${pm[vk]?.points??'?'} pts/unit</div><canvas class="spark" id="sk-${k}"></canvas></div>`;
+    return`<div class="scard ${c}"><div class="sdept">${e} ${label}</div><div class="snum">${d.price}</div><div class="sdelta ${ch>0?'tup':ch<0?'tdn':'tfl'}">${ch>0?'▲ +'+ch:ch<0?'▼ '+ch:'— 0'}</div><div class="spts"> ${pm[vk]?.points??'?'} pts/unit</div><canvas class="spark" id="sk-${k}"></canvas></div>`;
   }).join('')}</div>`;
 }
 
@@ -354,3 +354,4 @@ startCountdown();
 </script>
 </body>
 </html>
+
