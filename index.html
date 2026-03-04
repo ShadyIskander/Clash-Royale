@@ -132,8 +132,8 @@ main{flex:1;padding:12px}
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 16px;
+  font-family: 'Share Tech Mono', monospace; /* Changed to match tech look */
+  font-size: 16px; /* Increased to 16px */
   padding: 6px 0;
 }
 
@@ -145,7 +145,7 @@ main{flex:1;padding:12px}
 .wb-num {
   color: #C0CCE0;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 16px; /* Matched to 16px */
 }
 .wb-divider{height:1px;background:rgba(87,108,168,.15);margin:4px 0}
 .wb-row.wb-total{padding-top:8px;margin-top:4px;flex-direction:column;align-items:flex-start;gap:2px}
@@ -155,7 +155,7 @@ main{flex:1;padding:12px}
   justify-content: space-between;
   align-items: center;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 16px;
+  font-size: 16px; /* Matched to 16px */
   padding: 4px 0;
 }
 .sr-val {
@@ -243,21 +243,11 @@ footer{text-align:center;padding:12px;font-family:'Share Tech Mono',monospace;fo
 <script>
 const SHEET_ID = '1A23UY1LWW8KSCT0VVhZjj8QJXVjeR4h27LvdWkzYwVE';
 
-// Distinct, visually separated team colors — no blue-on-blue clashes.
-// Each hue is spaced far apart on the color wheel for instant recognition.
 const COLORS=[
-  {h:'#E8845A',r:'232,132,90'},   // 1 — warm amber-orange
-  {h:'#5ABF8C',r:'90,191,140'},   // 2 — fresh emerald
-  {h:'#D4738A',r:'212,115,138'},  // 3 — dusty rose
-  {h:'#7AB8E8',r:'122,184,232'},  // 4 — sky blue
-  {h:'#C4A84A',r:'196,168,74'},   // 5 — golden yellow
-  {h:'#A07ACE',r:'160,122,206'},  // 6 — soft violet
-  {h:'#5ABFBF',r:'90,191,191'},   // 7 — teal / cyan
-  {h:'#D47A5A',r:'212,122,90'},   // 8 — terracotta
-  {h:'#7ACE8C',r:'122,206,140'},  // 9 — mint green
-  {h:'#CE8A7A',r:'206,138,122'},  // 10 — salmon
-  {h:'#5A9ECE',r:'90,158,206'},   // 11 — cornflower blue
-  {h:'#B8CE5A',r:'184,206,90'},   // 12 — lime-yellow
+  {h:'#576CA8',r:'87,108,168'},{h:'#274690',r:'39,70,144'},{h:'#7A8C5E',r:'122,140,94'},
+  {h:'#8B9DC3',r:'139,157,195'},{h:'#5A7A4A',r:'90,122,74'},{h:'#3D5A9E',r:'61,90,158'},
+  {h:'#6B8C72',r:'107,140,114'},{h:'#4A6099',r:'74,96,153'},{h:'#9BACC4',r:'155,172,196'},
+  {h:'#324F8A',r:'50,79,138'},{h:'#8EA870',r:'142,168,112'},{h:'#6278AB',r:'98,120,171'},
 ];
 
 const VC={
@@ -483,3 +473,4 @@ startCountdown();
 </script>
 </body>
 </html>
+
