@@ -23,7 +23,7 @@
   --muted:#475569;
   --border:rgba(148,163,184,0.08);
   --border2:rgba(148,163,184,0.14);
-  --tank:#60A5FA;
+  --tank:#94A3B8;
   --navy:#818CF8;
   --air:#34D399;
   --gold:#FBBF24;
@@ -90,7 +90,7 @@ main{flex:1;padding:12px}
 .icard{border-radius:9px;padding:10px 8px;position:relative;overflow:hidden;border:1px solid var(--border2);background:var(--card2);backdrop-filter:blur(8px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
 .icard::before{content:'';position:absolute;inset:0;opacity:.05;background:var(--ic)}
 .icard::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ic)}
-.icard.tank1,.icard.tank2,.icard.tank3{--ic:#60A5FA}
+.icard.tank1,.icard.tank2,.icard.tank3{--ic:#94A3B8}
 .icard.navy1,.icard.navy2,.icard.navy3{--ic:#818CF8}
 .icard.air1,.icard.air2,.icard.air3{--ic:#34D399}
 
@@ -117,7 +117,7 @@ main{flex:1;padding:12px}
 .tcard{border-radius:12px;border:1px solid var(--border2);background:var(--card);backdrop-filter:blur(10px);overflow:hidden;position:relative;animation:riseIn .45s cubic-bezier(.22,1,.36,1) both;transition:transform .2s,box-shadow .2s}
 .tcard:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
 @keyframes riseIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.tcard.r1{border-color:#FBBF24;box-shadow:0 0 0 1px rgba(251,191,36,.3),0 0 28px rgba(251,191,36,.06)}
+.tcard.r1{border-color:rgba(148,163,184,.35);box-shadow:0 0 0 1px rgba(148,163,184,.15),0 0 28px rgba(148,163,184,.04)}
 .tcard.r2{border-color:rgba(203,213,225,.2)}
 .tcard.r3{border-color:rgba(96,165,250,.3)}
 .stripe{position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--tc)}
@@ -167,7 +167,7 @@ main{flex:1;padding:12px}
 
 .vtile{background:rgba(255,255,255,.02);border:1px solid rgba(148,163,184,.12);border-radius:8px;padding:10px 4px;text-align:center;position:relative;overflow:hidden}
 .vtile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--vc)}
-.vtile.vtank{--vc:#60A5FA}.vtile.vnavy{--vc:#818CF8}.vtile.vair{--vc:#34D399}
+.vtile.vtank{--vc:#94A3B8}.vtile.vnavy{--vc:#818CF8}.vtile.vair{--vc:#34D399}
 .vtile.wiped{opacity:.2;filter:grayscale(1)}
 .vemo{font-size:22px;line-height:1;margin-bottom:3px}
 .vtag{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:.08em;margin-bottom:3px}
@@ -389,7 +389,7 @@ function card(team,idx,pm,sm){
 
   // Stock colors: tank=blue, navy=indigo, air=green — all light enough on dark bg
   const stockPortfolio=[
-    {e:'🪖',lbl:'Tank Stock', n:team._tankS, color:'#93C5FD'},
+    {e:'🪖',lbl:'Tank Stock', n:team._tankS, color:'#94A3B8'},
     {e:'⚓',lbl:'Navy Stock', n:team._navyS, color:'#A5B4FC'},
     {e:'✈', lbl:'Air Stock',  n:team._airS,  color:'#6EE7B7'},
   ].map(({e,lbl,n,color})=>`
@@ -452,3 +452,4 @@ startCountdown();
 </script>
 </body>
 </html>
+
