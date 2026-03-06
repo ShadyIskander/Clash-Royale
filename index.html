@@ -333,6 +333,9 @@ function buildInfoCards(sm,pm){
     {color:'air',  emoji:'✈',  name:'Air',   stockKey:'AIR',  vehicleKey:'AirForce',  classes:['air1', 'air2', 'air3']},
   ];
 
+  const bazookaPrice=pm['Bazooka']?.price??'—';
+  const bazookaAttack=pm['BazookaAttack']?.price??'—';
+  const bazookaPts=pm['Bazooka']?.points??'—';
   const cards=groups.flatMap(({color,emoji,name,stockKey,vehicleKey,classes})=>{
     const stockPrice=sm[stockKey]?.price??'—';
     const ch=sm[stockKey]?.change||0;
@@ -362,7 +365,28 @@ function buildInfoCards(sm,pm){
     ];
   });
 
-  return`<div class="slbl">MARKET & VEHICLE REFERENCE</div><div class="info-grid">${cards.join('')}</div>`;
+  const bazookaCards=[
+    `<div class="icard" style="--ic:#F472B6;">
+      <div class="icard-emoji">💥</div>
+      <div class="icard-label">Bazooka Build</div>
+      <div class="icard-val" style="color:#F472B6;">${bazookaPrice}</div>
+      <div class="icard-sub" style="color:#F1F5F9">capital / unit</div>
+    </div>`,
+    `<div class="icard" style="--ic:#F472B6;">
+      <div class="icard-emoji">🎯</div>
+      <div class="icard-label">Attack Cost</div>
+      <div class="icard-val" style="color:#F472B6;">${bazookaAttack}</div>
+      <div class="icard-sub" style="color:#F1F5F9">capital / launch</div>
+    </div>`,
+    `<div class="icard" style="--ic:#F472B6;">
+      <div class="icard-emoji">⚔️</div>
+      <div class="icard-label">Battle Bonus</div>
+      <div class="icard-val" style="color:#F472B6;">${bazookaPts}</div>
+      <div class="icard-sub" style="color:#F1F5F9">pts if success</div>
+    </div>`,
+  ];
+
+  return`<div class="slbl">MARKET & VEHICLE REFERENCE</div><div class="info-grid">${[...cards,...bazookaCards].join('')}</div>`;
 }
 
 function buildAll(teams,sm,pm){
@@ -455,3 +479,4 @@ startCountdown();
 </script>
 </body>
 </html>
+
